@@ -2,7 +2,9 @@ from django.urls import reverse
 from django.urls import resolve
 from django.test import TestCase
 from .views import home, board_topics, new_topic
-from .models import Board
+from .models import Board, Topic, Post
+from django.contrib.auth.models import User
+from .forms import NewTopicForm
 
 
 class HomeTests(TestCase):
@@ -106,7 +108,6 @@ class NewTopicTests(TestCase):
         url = reverse('new_topic', kwargs={'pk': 1})
         response = self.client.post(url, {})
         self.assertEquals(response.status_code, 200)
-
 
     def test_contains_form(self):  # <- new test
         url = reverse('new_topic', kwargs={'pk': 1})
